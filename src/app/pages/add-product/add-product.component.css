@@ -1,0 +1,32 @@
+.mainContent {
+    width: 80%;
+    height: auto;
+    margin: auto;
+    margin-top: 30px;
+    padding-top: 35px;
+    padding-bottom: 50px;
+    padding-top: 60px;
+}
+
+.formLogin {
+    width: 100%;
+    margin-left: 40px;
+}
+
+h2 {
+    color: #225B56;
+}
+
+label {
+    color: #225B56;
+}
+
+button {
+    float: right;
+}
+
+.btns{
+    width: 100%;
+    background-color: #225B56;
+    margin-top: 50px;
+}

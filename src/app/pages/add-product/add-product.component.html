@@ -1,0 +1,33 @@
+<div class="mainContent">
+    <div class="col-12 text-center">
+        <h2 class="text-uppercase ">¡Añade un producto!</h2>
+        <small> Paso 1 de 2 - Agrega información de tu producto </small>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <div class="formLogin">
+                <form ngNativeValidate #save="ngForm" (ngSubmit)="guardar(save)"
+                    class="form-horizontal floating-labels has-error">
+                    <div class="form-group">
+                        <label for="name">Nombre del Producto</label>
+                        <input ngModel name="name" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sku">Sku del Producto</label>
+                        <input ngModel name="sku" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Descripción del Producto</label>
+                        <textarea ngModel name="description" class="form-control" id="description" rows="3"
+                            required></textarea>
+                    </div>
+                    <br>
+                    <button type="button" routerLink="/dashboard" style="float: left;"
+                        class="btn btnInfo"><b>Atrás</b></button>
+                    <button type="submit" class="btn btnSuccess"><b> Siguiente </b></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

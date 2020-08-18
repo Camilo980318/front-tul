@@ -1,0 +1,49 @@
+<div class="mainContent">
+    <div class="col-12 text-center">
+        <h2 class="text-uppercase ">¡Bienvenido Admin!</h2>
+        <small>Estos son todos los productos que has publicado</small>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <div class="formLogin">
+
+                <ng-container *ngIf="products.length < 1">
+                    <div class="alert alert-warning" role="alert">
+                        <h5>¡No tienes productos publicados en este momento!</h5>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="products.length >= 1">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Sku</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of products">
+                                <th>{{product?.name}}</th>
+                                <td>{{product?.sku}}</td>
+                                <td>{{product?.description}}</td>
+                                <td>{{product.status}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-12">
+            <div class="btns">
+                <button type="button" routerLink="/admin-login" style="float: left;"
+                    class="btn btnInfo"><b>Salir</b></button>
+                <button type="button" routerLink="/add-product" class="btn btnSuccess"><b>Añadir Producto</b></button>
+            </div>
+        </div>
+    </div>
+</div>

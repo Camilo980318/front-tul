@@ -1,0 +1,20 @@
+.btns button {
+    margin-right: 5px;
+}
+
+.navbar{
+    background-color: #225B56;
+}
+
+.navbar a {
+    /*color: #52B9A5;*/
+    color: #FFEB41;
+}
+
+.mainContent {
+    width: 90%;
+    height: auto;
+    margin: auto;
+    margin-top: 20px;
+    padding-top: 15px;
+}

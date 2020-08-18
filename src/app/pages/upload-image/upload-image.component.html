@@ -1,0 +1,26 @@
+<div class="mainContent">
+    <div class="col-12 text-center">
+        <h2 class="text-uppercase ">¡Añade un producto!</h2>
+        <small> Paso 2 de 2 - Agrega una imagen de tu producto </small>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <div class="formLogin">
+
+                <label for="image" *ngIf="nombreArchivo == null" class="labels custom-file-upload">
+                    Click Para Elegir la Imagen</label>
+
+                <label for="image" *ngIf="nombreArchivo != null"
+                    class="labels custom-file-upload text-center">{{ nombreArchivo }}</label>
+
+                <input name="image" id="image" (change)="getImagen( $event.target.files[0] )" type="file"
+                    class="imagenes-secundarias" />
+
+
+                <br><br>
+                <button (click)="subirImagen()" class="btn btnSuccess"><b> Guardar </b></button>
+            </div>
+        </div>
+    </div>
+</div>

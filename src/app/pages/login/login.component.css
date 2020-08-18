@@ -1,0 +1,31 @@
+.mainContent {
+    width: 35%;
+    height: auto;
+    margin: auto;
+    margin-top: 100px;
+    padding-top: 35px;
+    background-color: #225B56;
+    padding-bottom: 50px;
+    padding-top: 60px;
+    border-radius: 20px;
+    -webkit-box-shadow: 10px 13px 36px -1px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 13px 36px -1px rgba(0,0,0,0.75);
+box-shadow: 10px 13px 36px -1px rgba(0,0,0,0.75);
+}
+
+.formLogin {
+    width: 100%;
+    margin-left: 40px;
+}
+
+h3 {
+    color: white;
+}
+
+label {
+    color: white;
+}
+
+button {
+    float: right;
+}
