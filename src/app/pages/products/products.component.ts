@@ -27,7 +27,7 @@ export class ProductsComponent implements OnInit {
   }
 
   // Agregamos productos al carrito
-  addToCar(form: NgForm, id: string) {
+  addToCar(form: NgForm, id: string, price: number) {
 
     // Si no existe el carrito, se crea y luego se agregan los productos 
     if (!JSON.parse(localStorage.getItem('carId'))) {
@@ -36,7 +36,9 @@ export class ProductsComponent implements OnInit {
       setTimeout(() => {
 
         let idCar = JSON.parse(localStorage.getItem('carId'));
-        let productCar = new ProductCar(idCar, id, form.value.quantity);
+
+        let subtotal = form.value.quantity * price;
+        let productCar = new ProductCar(idCar, id, form.value.quantity, subtotal);
         this._productService.postCarProduct(productCar).subscribe();
 
       }, 300);
@@ -45,7 +47,8 @@ export class ProductsComponent implements OnInit {
 
       // Pero si existe, se obtiene el id del carrito y se asocian los productos con este
       let idCar = JSON.parse(localStorage.getItem('carId'));
-      let productCar = new ProductCar(idCar, id, form.value.quantity);
+      let subtotal = form.value.quantity * price;
+      let productCar = new ProductCar(idCar, id, form.value.quantity, subtotal);
       this._productService.postCarProduct(productCar).subscribe();
 
 

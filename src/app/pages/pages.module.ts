@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
 import { CarComponent } from './car/car.component';
+import { NgxPrintModule } from 'ngx-print';
 
 
 
@@ -21,7 +22,8 @@ import { CarComponent } from './car/car.component';
     RouterModule,
     FormsModule,
     PAGES_ROUTES,
-    ServicesModule
+    ServicesModule,
+    NgxPrintModule
   ],
   providers: [PagesComponent, LoginComponent, DashboardComponent, AddProductComponent]
 })

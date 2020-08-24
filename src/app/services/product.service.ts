@@ -9,6 +9,8 @@ import { throwError } from 'rxjs'
 
 import Swal from "sweetalert2"
 import { ProductCar } from '../models/ProductCar';
+import { Car } from '../models/Car';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +30,11 @@ export class ProductService {
   // Obtenemos todos los productos
   getProductos() {
     let url = `${URL_SERVICES}/products`;
+    return this.http.get(url);
+  }
+
+  getCar() {
+    let url = `${URL_SERVICES}/car`;
     return this.http.get(url);
   }
 
@@ -132,6 +139,12 @@ export class ProductService {
     return this.http.get(url);
   }
 
+  // Obtenemos la lista de productos por carrito en específico
+  getProductIdCar(idCar: string) {
+    let url = `${URL_SERVICES}/products-car/${idCar}`;
+    return this.http.get(url);
+  }
+
   // Actualizamos la cantidad de productos
   updateProductCar(productCar: ProductCar, id: String) {
     let url = `${URL_SERVICES}/products-car/${id}`
@@ -192,11 +205,17 @@ export class ProductService {
   }
 
 
+  addUser(user: User) {
+    let url = `${URL_SERVICES}/users`
+    return this.http.post(url, user);
+  }
+
+
   // Hacemos el checkout del carrito
-  updateCart(id: string) {
+  updateCart(id: string, car: Car) {
 
     let url = `${URL_SERVICES}/car/${id}`
-    return this.http.put(url, null).pipe(map((resp: any) => {
+    return this.http.put(url, car).pipe(map((resp: any) => {
       Swal.fire({
         title: '¡Bien hecho!',
         icon: 'success',
@@ -209,7 +228,7 @@ export class ProductService {
       }).then((result) => {
         if (result) {
           localStorage.removeItem('carId');
-          this.router.navigate(['/products'])
+          location.reload();
         }
       });
       return true;

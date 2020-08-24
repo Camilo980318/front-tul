@@ -1,3 +1,49 @@
+<!-- Modal -->
+<div class="modal fade" id="pay" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Información de Contacto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form ngNativeValidate #check="ngForm" (ngSubmit)="checkout(check)">
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="name">Nombres:</label>
+                                <input ngModel name="name" type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input ngModel name="email" type="email" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="phone">Teléfono:</label>
+                                <input ngModel name="phone" type="text" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnInfo" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btnSuccess">Pagar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <div class="mainContent">
     <div class="col-12">
         <h2 class="text-uppercase ">¡Este es tu carrito de compras!</h2>
@@ -6,6 +52,7 @@
     <br><br>
     <div class="row">
         <div class="col-12">
+
             <ng-container *ngIf="productCar.length < 1">
                 <div class="alert alert-warning" role="alert">
                     <h5>¡No tienes productos seleccionados en este momento!</h5>
@@ -18,42 +65,56 @@
                         <tr>
                             <th scope="col">Nombre</th>
                             <th scope="col">Sku</th>
+                            <th scope="col">Precio c/u</th>
                             <th scope="col">Cantidad</th>
+                            <th scope="col">Subtotal</th>
                             <th scope="col">Acción</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let product of productCar">
-                            <ng-container *ngIf="carId === product?.car_id?._id">
-                                <th>{{product?.product_id.name}}</th>
-                                <td>{{product?.product_id.sku}}</td>
-                                <td>{{product?.quantity}}</td>
-                                <td>
-                                    <form ngNativeValidate #update="ngForm"
-                                        (ngSubmit)="updateQuantity(update, product?._id)">
-                                        <input type="number" [(ngModel)]="product.quantity" name="quantity"
-                                            style="width: 15%;" class="form-control" placeholder="Cantidad" required>
 
-                                        <div class="actionCart">
-                                            <button type="submit" class="btn btnSuccess">Actualizar</button>&nbsp;
-                                            <button type="button" (click)="deleteProductCart(product._id)"
-                                                class="btn btn-danger"><b>X</b></button>
-                                        </div>
+                            <th>{{product?.product_id.name}}</th>
+                            <td>{{product?.product_id.sku}}</td>
+                            <td>{{product?.product_id.price}}</td>
+                            <td>{{product?.quantity}}</td>
+                            <td>{{product?.subtotal}}</td>
+                            <td>
+                                <form ngNativeValidate #update="ngForm"
+                                    (ngSubmit)="updateQuantity(update, product?._id, product?.product_id.price)">
+                                    <input type="number" [(ngModel)]="product.quantity" name="quantity"
+                                        style="width: 15%;" class="form-control" placeholder="Cantidad" required>
 
-                                    </form>
-                                </td>
-                            </ng-container>
+                                    <div class="actionCart">
+                                        <button type="submit" class="btn btnSuccess">Actualizar</button>&nbsp;
+                                        <button type="button" (click)="deleteProductCart(product._id)"
+                                            class="btn btn-danger"><b>X</b></button>
+                                    </div>
+
+                                </form>
+                            </td>
+
                         </tr>
                     </tbody>
                 </table>
             </ng-container>
         </div>
     </div>
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <h4 style="float: right;">Total a Pagar: <b style="color: #52B9A5;">${{total}}</b></h4>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-12"><br><br>
-            <button type="button" style="float: right;" (click)="checkout()" class="btn btnInfo"><b>Hacer
-                    Chek-out</b></button>
+            <button type="button" style="float: right;" class="btn btnInfo" data-toggle="modal"
+                data-target="#pay"><b>Hacer Pago</b></button>
+            <!--<button type="button" style="float: right;" (click)="checkout()" class="btn btnInfo" data-toggle="modal"
+                data-target="#pay"><b>Hacer
+                    Chek-out</b></button>-->
         </div>
     </div>
 </div>

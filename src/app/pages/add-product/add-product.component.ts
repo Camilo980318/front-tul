@@ -34,10 +34,10 @@ export class AddProductComponent implements OnInit {
 
       if (result.value) {
 
-        let producto = new Product(form.value.name, form.value.sku, form.value.description);
+        let product = new Product(form.value.name, form.value.sku, form.value.description, form.value.price);
 
         this._productService.getSku(form.value.sku);
-        this._productService.guardarProducto(producto).subscribe();
+        this._productService.guardarProducto(product).subscribe();
 
       }
 

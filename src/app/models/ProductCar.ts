@@ -5,6 +5,7 @@ export class ProductCar {
         public car_id?: String,
         public product_id?: String,
         public quantity?: Number,
+        public subtotal?: Number,
 
     ) { }
 

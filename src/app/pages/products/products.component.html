@@ -6,22 +6,28 @@
     <br><br>
     <div class="row">
         <ng-container *ngFor="let product of products">
-            <div class="col-3">
-                <div class="card" style="width: 18rem;">
-                    <img [src]="product.image | image: product.sku" class="card-img-top">
-                    <div class="card-body">
+            <div class="products">
+                <div class="col-3">
+                    <div class="card" style="width: 18rem;">
+                        <img [src]="product.image | image: product.sku" class="card-img-top">
+                        <div class="card-body">
 
-                        <h5 class="card-title">{{product?.name}}</h5>
-                        <small>{{ product?.sku }}</small>
-                        <p class="card-text">{{product.description}}</p>
-                        <form ngNativeValidate #add="ngForm" (ngSubmit)="addToCar(add, product?._id)">
-                            <input type="number" ngModel name="quantity" style="width: 50%;" class="form-control"
-                                placeholder="Cantidad" required> <br>
-                            <button type="submit" style="width: 100%;" class="btn btnSuccess">Añadir al carrito</button>
-                        </form>
+                            <h5 class="card-title">{{product?.name}}</h5>
+                            <small>{{ product?.sku }}</small><br>
+                            <label style="color: #52B9A5;"><b>${{product?.price}}</b></label>
+                            <p class="card-text">{{product.description}}</p>
+                            <form ngNativeValidate #add="ngForm"
+                                (ngSubmit)="addToCar(add, product?._id, product?.price)">
+                                <input type="number" ngModel name="quantity" style="width: 50%;" class="form-control"
+                                    placeholder="Cantidad" required> <br>
+                                <button type="submit" style="width: 100%;" class="btn btnSuccess">Añadir al
+                                    carrito</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <br>
         </ng-container>
     </div>

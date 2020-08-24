@@ -1,3 +1,83 @@
+<!-- Modal -->
+<div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detalles de la Venta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body" id="toPrint">
+                <div class="row">
+                    <div class="col-12">
+                        <p><b> Referencia de Venta: </b>{{idCar}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p><b> Cliente: </b>{{userName}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p><b> Email: </b>{{userEmail}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p><b> Teléfono: </b>{{userName}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p><b> Total: </b>{{total}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p><b> Fecha de Pago: </b>{{fecha_pago}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p><b> Productos Vendidos:</b></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Sku</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of productsVenta">
+                                    <th>{{product?.product_id.name}}</th>
+                                    <td>{{product?.product_id.sku}}</td>
+                                    <td>{{product?.quantity}}</td>
+                                    <td>{{product?.subtotal}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnInfo" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btnSuccess" printSectionId="toPrint" [useExistingCss]="true"
+                    ngxPrint>Imprimir Recibo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="mainContent">
     <div class="col-12 text-center">
         <h2 class="text-uppercase ">¡Bienvenido Admin!</h2>
@@ -20,6 +100,7 @@
                             <tr>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Sku</th>
+                                <th scope="col">Precio</th>
                                 <th scope="col">Descripción</th>
                                 <th scope="col">status</th>
                             </tr>
@@ -28,6 +109,7 @@
                             <tr *ngFor="let product of products">
                                 <th>{{product?.name}}</th>
                                 <td>{{product?.sku}}</td>
+                                <td>{{product?.price}}</td>
                                 <td>{{product?.description}}</td>
                                 <td>{{product.status}}</td>
                             </tr>
@@ -37,9 +119,59 @@
             </div>
         </div>
     </div>
+    <br><br>
+    <div class="row">
+        <div class="col-10 formLogin">
+            <h3>Ventas Realizadas</h3><br>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 formLogin">
+            <ng-container *ngIf="ventas.length < 1">
+                <div class="alert alert-warning" role="alert">
+                    <h5>¡No tienes ventas realizadas en este momento!</h5>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="ventas.length >= 1">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col"># Venta</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let venta of ventas">
+                            <th>{{venta?._id}}</th>
+                            <td>{{venta?.user.name}}</td>
+                            <td>{{venta?.user.email}}</td>
+                            <td>{{venta?.user.phone}}</td>
+                            <td>{{venta?.total}}</td>
+                            <td>{{venta?.status}}</td>
+                            <td>
+                                <button type="button" (click)="getVentasProducts(venta._id, venta)"
+                                    style="margin-top: -5px; margin-left: -20px;" class="btn btnInfo"
+                                    data-toggle="modal" data-target="#info"><b>Ver
+                                        Más</b></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-container>
+        </div>
+    </div>
+
+
     <div class="row text-center">
         <div class="col-12">
-            <div class="btns">
+            <div class="btns formLogin">
                 <button type="button" routerLink="/admin-login" style="float: left;"
                     class="btn btnInfo"><b>Salir</b></button>
                 <button type="button" routerLink="/add-product" class="btn btnSuccess"><b>Añadir Producto</b></button>
